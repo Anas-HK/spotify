@@ -139,4 +139,12 @@ public abstract class AbstractSongCatalog {
     public abstract double getAverageValue(SongProperty songProperty, List<SongEntry> songEntriesList);
 
     public abstract List<SongEntry> getFirstFiveSongEntries();
+
+    public abstract int getNumberOfUniqueSongs();
+
+    public abstract int getNumberOfUniqueArtists();
+
+    public abstract double getAverageDuration();
+
+    public abstract double getAverageTempo();
 }

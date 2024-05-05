@@ -42,23 +42,22 @@ public class SongEntry {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("SongEntry{");
-
         sb.append("ID=");
         sb.append(getId());
         sb.append(", ");
 
-        Iterator<SongProperty> propertyIterator = songPropertyMap.propertySet().iterator();
-        while (propertyIterator.hasNext()) {
-            SongProperty p = propertyIterator.next();
-            sb.append(p.getName());
+        // Iterate through each song property and append it to the string
+        for (SongDetail detail : SongDetail.values()) {
+            sb.append(detail);
             sb.append("=");
-            sb.append(getSongProperty(p));
-
-            if(propertyIterator.hasNext()) {
-                sb.append(", ");
-            }
+            sb.append(getSongDetail(detail));
+            sb.append(", ");
         }
+
+        sb.delete(sb.length() - 2, sb.length()); // Remove the extra ", " at the end
         sb.append("}");
+
         return sb.toString();
     }
+
 }

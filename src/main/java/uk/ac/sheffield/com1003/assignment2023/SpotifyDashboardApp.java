@@ -49,15 +49,27 @@ public class SpotifyDashboardApp {
             };
         }
         SpotifyDashboardApp spotifyDashboardApp = new SpotifyDashboardApp(args[0], args[1]);
+
+        // Print out the songCatalog
+        System.out.println("Song Catalog:");
+        System.out.println(spotifyDashboardApp.songCatalog);
+
+        // Print out the listOfQueries
+        System.out.println("List of Queries:");
+        System.out.println(spotifyDashboardApp.listOfQueries);
+
+        // Print out the songCatalog
         spotifyDashboardApp.startCLI();
-        spotifyDashboardApp.startGUI();
+        // spotifyDashboardApp.startGUI();
     }
 
     public void startCLI() {
         // Basic song catalogue information
         printQuestionAnswers();
-
+        System.out.println("Hello CLI");
         // Queries
+
+//        calculateAverageTempo();
         printNumberQueries();
         executeQueries();
     }
@@ -74,35 +86,57 @@ public class SpotifyDashboardApp {
     }
 
     private void printNumberQueries() {
-        // TODO implement
+    	System.out.println("In total, " + listOfQueries.size() + " queries were found.");
+		System.out.println();
     }
 
     private void printQuestionAnswers() {
-        // TODO implement
-        // see examples about how you could report the answers
-        // printNumberUniqueSongs();
-        // printNumberUniqueArtists();
-        // System.out.println("The average duration of a song in the dataset is: ");
-        // System.out.println("The average tempo of a song in the dataset is ");
+        System.out.println("Basic information about the dataset:");
+
+        // Total number of unique song entries
+        printNumberUniqueSongs();
+
+        // Total number of unique artists
+        printNumberUniqueArtists();
+
+        // Average duration of a song
+//        System.out.println("The average duration of a song in the dataset is: " + calculateAverageDuration());
+//
+//        // Average tempo of a song
+//        System.out.println("The average tempo of a song in the dataset is: " + calculateAverageTempo());
+
+        System.out.println(); // Add a blank line for readability
     }
 
-    private void printNumberUniqueArtists() {
-        // TODO implement
-        // System.out.print("The total number of unique artists in the dataset is: ");
-
+    private double calculateAverageDuration() {
+        double averageDuration = songCatalog.getAverageDuration();
+        // Format the average duration to have only 2 decimal places
+        return Math.round(averageDuration * 100.0) / 100.0;
+    }
+//
+    private double calculateAverageTempo() {
+        double averageTempo = songCatalog.getAverageTempo();
+        // Format the average tempo to have only 2 decimal places
+        return Math.round(averageTempo * 100.0) / 100.0;
     }
 
     private void printNumberUniqueSongs() {
-        // TODO implement
-        // System.out.print("The total number of unique songs in the dataset is: ");
+        int numberOfSongs = songCatalog.getNumberOfUniqueSongs();
+        System.out.println("The total number of unique songs in the dataset is: " + numberOfSongs);
+    }
 
+    private void printNumberUniqueArtists() {
+        int numberOfArtists = songCatalog.getNumberOfUniqueArtists();
+        System.out.println("The total number of unique artists in the dataset is: " + numberOfArtists);
     }
 
     private void printFirstFiveSongEntries() {
-        // TODO implement, TIP: you can use songCatalog.getFirstFiveSongEntries
-        // System.out.println("Printing first five song entries");
-
+        List<SongEntry> firstFiveSongEntries = songCatalog.getFirstFiveSongEntries();
+        for (int i = 0; i < firstFiveSongEntries.size(); i++) {
+            System.out.println("Song " + (i + 1) + ": " + firstFiveSongEntries.get(i));
+        }
     }
+
 
     private void printSongEntries(List<SongEntry> songEntriesList) {
         // to avoid long prints to console, list is limited to 5
